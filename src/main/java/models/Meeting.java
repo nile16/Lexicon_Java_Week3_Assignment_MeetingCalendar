@@ -2,6 +2,7 @@ package models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Meeting {
@@ -11,7 +12,7 @@ public class Meeting {
     private LocalTime start;
     private LocalTime end;
     private Person organizer;
-    private List<Person> attendants;
+    private List<Person> attendants = new ArrayList<>();
 
     public Meeting(int id, String topic, LocalDate meetingDate, LocalTime start, LocalTime end, Person organizer) {
         this.id = id;
@@ -23,11 +24,9 @@ public class Meeting {
     }
 
     public void addAttendant(Person person) {
-
-    }
-
-    public int compareTo(Meeting meeting) {
-        return 0;
+        if (!attendants.contains(person)) {
+            attendants.add(person);
+        }
     }
 
     public List<Person> getAttendants() {
@@ -59,7 +58,7 @@ public class Meeting {
     }
 
     public void removeAttendant(Person person) {
-
+         attendants.remove(person);
     }
 
     public void setAttendants(List<Person> attendants) {

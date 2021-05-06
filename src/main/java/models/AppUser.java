@@ -24,10 +24,26 @@ public class AppUser {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        if (password == null) {
+            return;
+        }
+
+        password = password.trim();
+
+        if (!password.equalsIgnoreCase("")) {
+            this.password = password;
+        }
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        if (username == null) {
+            return;
+        }
+
+        username = username.trim();
+
+        if (!username.equalsIgnoreCase("")) {
+            this.username = username;
+        }
     }
 }
