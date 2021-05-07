@@ -13,7 +13,7 @@ public class AppUserRepository {
         INSTANCE = new AppUserRepository();
     }
 
-    public static AppUserRepository getInstance(){
+    public static AppUserRepository getInstance() {
         return INSTANCE;
     }
 
@@ -21,14 +21,50 @@ public class AppUserRepository {
         appUserList = new ArrayList<>();
     }
 
-    public void clear(){
+    public void clear() {
         appUserList.clear();
     }
 
-    public AppUser persist(AppUser appUser){
-        if(!appUserList.contains(appUser)){
+    public List<AppUser> findAll() {
+        return appUserList;
+    }
+
+    public AppUser findById(int id) {
+        for(AppUser appuser : appUserList) {
+            if (appuser.getId() == id) {
+                return appuser;
+            }
+        }
+        return null;
+    }
+
+    public AppUser findByUsername(String userName) {
+        for(AppUser appuser : appUserList) {
+            if (appuser.getUsername().equals(userName)) {
+                return appuser;
+            }
+        }
+        return null;
+    }
+
+    public int getAppUserCount() {
+        return appUserList.size();
+    }
+
+    public void persist(AppUser appUser) { // Return value never used so made it void
+        if (!appUserList.contains(appUser)) {
             appUserList.add(appUser);
         }
-        return appUser;
     }
+
+    public boolean remove(int id) {
+        for(AppUser appuser : appUserList) {
+            if (appuser.getId() == id) {
+                appUserList.remove(appuser);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
