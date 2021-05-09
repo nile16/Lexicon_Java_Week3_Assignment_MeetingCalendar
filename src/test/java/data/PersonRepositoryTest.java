@@ -54,13 +54,15 @@ public class PersonRepositoryTest {
     @Test
     public void findByEmail() {
         //Arrange
-        Person result;
+        Person result1, result2;
 
         //Act
-        result = personRepository.findByEmail("johansson@yahoo.com");
+        result1 = personRepository.findByEmail("johansson@yahoo.com");
+        result2 = personRepository.findByEmail("kentsson@yahoo.com");
 
         //Assert
-        Assert.assertEquals("johansson@yahoo.com", result.getEmail());
+        Assert.assertEquals("johansson@yahoo.com", result1.getEmail());
+        Assert.assertNull(result2);
     }
 
     @Test
@@ -79,13 +81,15 @@ public class PersonRepositoryTest {
     @Test
     public void findById() {
         //Arrange
-        Person result;
+        Person result1, result2;
 
         //Act
-        result = personRepository.findById(2);
+        result1 = personRepository.findById(2);
+        result2 = personRepository.findById(99);
 
         //Assert
-        Assert.assertEquals(2, result.getId());
+        Assert.assertEquals(2, result1.getId());
+        Assert.assertNull(result2);
     }
 
     @Test
@@ -104,13 +108,15 @@ public class PersonRepositoryTest {
     @Test
     public void findByUsername() {
         //Arrange
-        Person result;
+        Person result1, result2;
 
         //Act
-        result = personRepository.findByUsername("burt");
+        result1 = personRepository.findByUsername("burt");
+        result2 = personRepository.findByUsername("bart");
 
         //Assert
-        Assert.assertEquals("burt", result.getUserCredentials().getUsername());
+        Assert.assertEquals("burt", result1.getUserCredentials().getUsername());
+        Assert.assertNull(result2);
     }
 
     @Test
@@ -138,20 +144,23 @@ public class PersonRepositoryTest {
 
         //Assert
         result = personRepository.findAll();
-        Assert.assertEquals(3, result.size());
+        Assert.assertTrue(result.contains(person1));
+        Assert.assertTrue(result.contains(person2));
+        Assert.assertTrue(result.contains(person3));
     }
 
     @Test
     public void remove() {
         //Arrange
-        int result;
+        List<Person> result;
 
         //Act
         personRepository.remove(2);
         personRepository.remove(3);
 
         //Assert
-        result = personRepository.getPeopleCount();
-        Assert.assertEquals(3, result);
+        result = personRepository.findAll();
+        Assert.assertFalse(result.contains(person2));
+        Assert.assertFalse(result.contains(person3));
     }
 }

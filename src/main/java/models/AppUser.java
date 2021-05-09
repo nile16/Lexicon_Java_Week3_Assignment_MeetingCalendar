@@ -1,7 +1,7 @@
 package models;
 
 public class AppUser {
-    private int id;
+    private final int id;
     private String username;
     private String password;
 
@@ -24,7 +24,7 @@ public class AppUser {
     }
 
     public void setPassword(String password) {
-        if (password == null) {
+        if (password == null || password.equals("")) {
             return;
         }
 
@@ -36,7 +36,7 @@ public class AppUser {
     }
 
     public void setUsername(String username) {
-        if (username == null) {
+        if (username == null || username.equals("")) {
             return;
         }
 

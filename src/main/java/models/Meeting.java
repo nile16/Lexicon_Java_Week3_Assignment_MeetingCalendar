@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Meeting {
-    private int id;
+    private final int id;
     private String topic;
     private LocalDate meetingDate;
     private LocalTime start;
